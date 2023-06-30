@@ -4,7 +4,7 @@ import { TodoList } from '../TodoList';
 import { TodoItems } from '../TodoItem';
 import { CreateTodoButton } from '../CreateTodobutton';
 
-function AppUI({completedTodos, totalTodos, searchValue, setSearchValue, searchedTodos, completeTodo, deleteTodo}) {
+function AppUI({completedTodos, totalTodos, searchValue, setSearchValue, searchedTodos, completeTodo, deleteTodo, loading, error}) {
     return (
         <>
           <TodoCounter completed={completedTodos} total={totalTodos}/>
@@ -14,6 +14,9 @@ function AppUI({completedTodos, totalTodos, searchValue, setSearchValue, searche
           />
     
           <TodoList>
+            {loading && <p>Estamos cargando...</p>}
+            {error && <p>Se pudrio pa</p>}
+            {(!loading && searchedTodos.length === 0) && <p>Crea un To Do!</p>}
             {searchedTodos.map(todo => (
             <TodoItems
               key={todo.text}
